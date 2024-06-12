@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>How the Internet works - a practical perspective</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/beige.css" id="theme">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .reveal section h1,
+        .reveal section h2,
+        .reveal section p {
+            text-align: center;
+        }
+
+        .reveal section p {
+            font-size: 1.5em;
+            color: #888;
+        }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            margin: 10px 0;
+            font-size: 1.2em;
+            padding: 10px;
+        }
+
+        .reveal ul li i {
+            margin-right: 10px;
+        }
+
+        .image-row-fixedh {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .image-row-fixedh img {
+            width: auto;
+            height: 30%;
+        }
+
+        .image-row-fixedw {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .image-row-fixedw img {
+            width: 30%;
+            height: auto;
+        }
+
+        #time {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        #time,
+        .reveal .slide-number {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        h1.white-shadow {
+            font-size: 3em;
+            color: black;
+            text-shadow: -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
+        }
+
+        h2.white-shadow {
+            font-size: 2em;
+            color: black;
+            text-shadow: -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
+        }
+
+        .full {
+            height: 100%;
+            width: 100%;
+        }
+
+        .glitch {
+            animation: glitch 1s infinite linear;
+            color: #8B0000;
+        }
+
+        .two-columns {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .two-columns div {
+            flex: 1;
+            margin: 0 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            font-size: .5em;
+        }
+
+        .three-columns {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .three-columns div {
+            flex: 1;
+            margin: 0 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            font-size: .5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div id="time"></div>
+        <div class="slides">
+
+            <script>
+                // set time
+                const time = document.getElementById('time');
+                setInterval(() => {
+                    const date = new Date();
+                    const hours = date.getHours();
+                    const minutes = date.getMinutes();
+                    time.textContent = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+                }, 1000);
+            </script>
+
+            <section>
+                <h1>How the Internet works</h1>
+                <h2>A practical perspective</h2>
+                <p>Slawek Zak - Technical Program Manager - Google Network Edge</p>
+            </section>
+
+            <!-- 
+            II. History of the Internet
+            A. ARPAnet - A collaboration between military and academia
+            - 1960s - the US Department of Defense and universities worked together
+            - Goal: Create a resilient, decentralized network that could withstand attacks
+            - The network was designed to function even if parts of it were destroyed
+            - Information could take multiple paths to reach its destination
+            -->
+
+            <section>
+                <h1>What is a network?</h1>
+                <div class="three-columns">
+                    <div style="font-size: 1.2em;">Collection of computers, servers, network devices, and other devices,
+                        connected to one
+                        another to
+                        allow the sharing of data.
+                    </div>
+                    <div>
+                        <img src="network.png" alt="Network">
+                    </div>
+            </section>
+
+            <section>
+                <h2>Understanding the Word "Internet"</h2>
+                <p>The term "Internet" comes from the combination of two words: "inter-" and "net."</p>
+                <ul>
+                    <li><strong>Inter-</strong>: A prefix meaning "between" or "among."</li>
+                    <li><strong>Net</strong>: Short for "network," which is a collection of computers or devices
+                        connected together to share information.</li>
+                </ul>
+                <p>So, "Internet" essentially means a network of networks, where multiple networks are interconnected to
+                    share information globally.</p>
+            </section>
+
+
+            <section data-background="yawn.gif">
+                <h1 class="white-shadow">History of the Internet</h1>
+            </section>
+
+            <section>
+                <h2>ARPAnet - A Collaboration Between Military and Academia</h2>
+                <ul>
+                    <li><i class="fas fa-handshake"></i> 1960s: US Department of Defense and universities teamed up.
+                    </li>
+                    <li><i class="fas fa-shield-alt"></i> Goal: Create a resilient, attack-proof network.</li>
+                    <li><i class="fas fa-university"></i> Purpose: Enable military and academic communication.</li>
+                    <li><i class="fas fa-lightbulb"></i> Innovation: Introduced packet switching technology.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>A Resilient Network</h2>
+                <ul>
+                    <li><i class="fas fa-bomb"></i> Designed to function even if parts of it were destroyed.</li>
+                    <li><i class="fas fa-info-circle"></i> Multiple paths to reach its destination</li>
+                    <li><i class="fas fa-network-wired"></i> Breaks data into small packets delivered independently
+                    </li>
+                    <li><i class="fas fa-redo"></i> Includes redundancy in hardware and network paths to maintain
+                        service during failures or attacks.</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <img src="a-to-b.png" alt="A to B" style="width: 80%">
+            </section>
+
+
+            <!-- TCP/IP protocol
+            TCP/IP is like a special language that computers use to talk to each other on the Internet
+            Imagine you have a big puzzle that you want to send to your friend
+            TCP/IP helps you break the puzzle into smaller pieces and put each piece in an envelope
+            It makes sure all the envelopes reach your friend and that the puzzle can be put back together correctly             
+            -->
+
+            <!-- physical Internet connectivity -->
+            <section>
+                <h1>Physical Internet connectivity</h1>
+            </section>
+
+            <!--  95-97% of all international Internet traffic is transmitted through subsea cables, slide background from subsea-cables.png -->
+
+            <section data-background="subsea-cables.png">
+                <h2 class="white-shadow">
+                    95-97% of international Internet traffic goes through almost 500 subsea cables
+                </h2>
+            </section>
+
+            <section data-background="cable-ship.png" class="full">
+                <h2 class="white-shadow" style="position: absolute; bottom: 0px;">Cable lying ship</h2>
+            </section>
+
+
+            <section>
+                <h2>Interactive Quiz: Longest Subsea Cable</h2>
+                <p>Guess the length of the longest subsea cable</p>
+                <ul>
+                    <li>
+                        <ul>
+                            <li>11,000 km</li>
+                            <li>25,000 km</li>
+                            <li>45,000 km</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section data-background="internets-most-dangerous-predator.webp" class="full">
+                <h2 class="white-shadow" style="position: absolute; top: 0px; right: 0">Internet's most dangerous
+                    predator
+                </h2>
+            </section>
+
+
+            <section data-background="cable-repair.webp" class="full">
+                <h2 class="white-shadow" style="position: absolute; top: 0px; right: 0">
+                    Cable cut repair
+                </h2>
+            </section>
+
+
+            <section class="full">
+                <h2>Basic network cabling</h2>
+                <div class="image-row-fixedw">
+                    <img src="coaxial-cable.jpg" alt="Coaxial cable">
+                    <img src="ethernet-cable.jpg" alt="Ethernet cable">
+                    <img src="fiber-optic-cable.jpg" alt="Fibre optic cable">
+                </div>
+            </section>
+
+            <section>
+                <h2>Wireless Internet access</h2>
+                <ul>
+                    <li><i class="fas fa-wifi"></i> Wi-Fi, cellular networks, and satellite Internet</li>
+                    <li><i class="fas fa-satellite-dish"></i> Satellite Internet for remote areas</li>
+                </ul>
+            </section>
+
+            <section data-background="satellite-Internet.png" class="full">
+                <h2 class="white-shadow" style="position: absolute; bottom: 0px;">Satellite Internet transmission</h2>
+            </section>
+
+            <section data-background="loon.png" class="full">
+                <h2 class="white-shadow" style="position: absolute; bottom: 0px;">Google project loon</h2>
+            </section>
+
+            <section>
+                <h2>The birth of the web</h2>
+                <ul>
+                    <li><i class="fas fa-globe"></i> WWW made the Internet more accessible and
+                        user-friendly</li>
+                    <li><i class="fas fa-link"></i> Websites and hyperlinks allow easy navigation and discovery</li>
+                    <li><i class="fas fa-book"></i>Library where you can find and access the books
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Commercial Internet beginnings - 1990s</h2>
+                <ul>
+                    <li><i class="fas fa-shopping-cart"></i> Businesses discovered Internet for commerce</li>
+                    <li><i class="fas fa-globe-americas"></i> Online shopping and transactions</li>
+                    <li><i class="fas fa-store"></i> Global marketplace</li>
+                </ul>
+            </section>
+
+            <section class="full">
+                <h2>Interactive Quiz: How fast?</h2>
+                <p>Match cable type with maximum throughput / capacity</p>
+                <div class="image-row-fixedw">
+                    <img src="fiber-optic-cable.jpg" alt="Fibre optic cable">
+                    <img src="ethernet-cable.jpg" alt="Ethernet cable">
+                    <img src="coaxial-cable.jpg" alt="Coaxial cable">
+                </div>
+                <p>Cable speeds</p>
+                <ul style="list-style-type: none; display: flex; padding: 0; justify-content: center;">
+                    <li style="border: 1px solid #000;">1 Gbps</li>
+                    <li style="border: 1px solid #000;">10 Gbps</li>
+                    <li style="border: 1px solid #000;">400 Gbps</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h1>Higher level Internet overview</h1>
+            </section>
+
+            <section>
+                <h2>AS - Autonomous System - an "atom"</h2>
+                <ul>
+                    <li><i class="fas fa-globe-americas"></i>Examples: Google (AS15169), Facebook (AS32934), Amazon
+                        (AS16509)</li>
+                    <li><i class="fas fa-atom"></i> AS is a network under the control of
+                        one
+                        entity</li>
+                    <li><i class="fas fa-link"></i> Connected to the Internet through one or more ISPs</li>
+            </section>
+
+            <section>
+                <h2>ISP - Internet Service Provider</h2>
+                <ul>
+                    <li><i class="fas fa-globe-europe"></i> Example: Swisscom, Sunrise, Salt, Fiber7</li>
+                    <li><i class="fas fa-globe-americas"></i> Allows customers to access the Internet </li>
+                    <li><i class="fas fa-link"></i> Delivers connectivity through various technologies</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h2>Internet Transit Providers</h2>
+                <ul>
+                    <li><i class="fas fa-globe-americas"></i> ISPs that provide access to the
+                        entire
+                        Internet</li>
+                    <li><i class="fas fa-link"></i> Connect to multiple networks and exchange traffic</li>
+                    <li><i class="fas fa-globe-americas"></i> Example: Level 3, Cogent, GTT</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>IXP - Internet Exchange Point</h2>
+                <ul>
+                    <li><i class="fas fa-globe-americas"></i> Example: SWISS-IX, DE-CIX, AMS-IX, LINX</li>
+                    <li><i class="fas fa-exchange-alt"></i> IXP is a physical location where
+                        different
+                        networks meet</li>
+                    <li><i class="fas fa-link"></i> Networks exchange traffic with each other</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Peering</h2>
+                <ul>
+                    <li><i class="fas fa-handshake"></i> Networks connect directly to each other</li>
+                    <li><i class="fas fa-link"></i> Exchange traffic without going through a third party</li>
+                    <li><i class="fas fa-globe-americas"></i> Reduces latency and costs</li>
+                </ul>
+            </section>
+
+            <section>
+                <h1>Bits on the wire</h1>
+            </section>
+
+            <section>
+                <h2>What is a bit?</h2>
+                <p>Smallest unit of data in a computer</p>
+                <img src="01.webp" alt="01" style="height: 600px">
+            </section>
+
+            <section>
+                <h2>Quantization - conversion to bits</h2>
+                <ul>
+                    <li><i class="fas fa-cog"></i> Almost everything can become bits</li>
+                    <li><i class=" fas fa-file-alt"></i> Text, pictures, music, video</li>
+                    <li><i class="fas fa-globe-americas"></i> ONLY bits are transmitted over the Internet</li>
+                </ul>
+            </section>
+
+            <section class="full">
+                <h2>What is a protocol?</h2>
+                <p>A way to regulate language</p>
+                <div class="image-row-fixedh">
+                    <img src="both-speak.png">
+                    <img src="cant-hear.png">
+                    <img src="speaks-too-much.png">
+                </div>
+            </section>
+
+            <section>
+                <h2>TCP/IP Protocol</h2>
+                <ul>
+                    <li><i class="fas fa-puzzle-piece"></i> Imagine a solved puzzle you send to your friend</li>
+                    <li><i class="fas fa-envelope"></i> TCP/IP breaks the puzzle into smaller pieces and puts them in
+                        envelopes</li>
+                    <li><i class="fas fa-user-friends"></i> Intermediaries (like routers) help direct these pieces to
+                        the right place</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Each piece needs an address to know where it's going and
+                        where it's from</li>
+                    <li><i class="fas fa-check"></i> All pieces reach your friend and TCP/IP puts the puzzle in the
+                        correct order</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h1>IPv4 and IPv6 Addressing</h1>
+            </section>
+
+            <section>
+                <h2>IPv4 Addressing</h2>
+                <ul>
+                    <li><i class="fas fa-network-wired"></i> IPv4 addresses are like house numbers for computers, but
+                        there are only about 4.3 billion of them.</li>
+                    <li><i class="fas fa-code"></i> Written as four numbers separated by dots (e.g., 192.168.0.1).</li>
+                    <li><i class="fas fa-globe-americas"></i> We started running out of these addresses because there
+                        are so many devices on the Internet.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>IPv6 Addressing</h2>
+                <ul>
+                    <li><i class="fas fa-network-wired"></i> IPv6 addresses are like new house numbers, and there are so
+                        many of them that we won't run out anytime soon.</li>
+                    <li><i class="fas fa-code"></i> Written with more numbers and letters, separated by colons (e.g.,
+                        2001:0db8:85a3:0000:0000:8a2e:0370:7334).</li>
+                    <li><i class="fas fa-globe-americas"></i> IPv6 makes the Internet faster and safer.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h1>DNS - Domain Name System</h1>
+            </section>
+
+            <section>
+                <h2>What is DNS?</h2>
+                <ul>
+                    <li><i class="fas fa-globe"></i> DNS stands for Domain Name System.</li>
+                    <li><i class="fas fa-address-book"></i> It works like the Internet's address book.</li>
+                    <li><i class="fas fa-search"></i> Translates human-friendly website names (like www.google.com) into
+                        IP addresses (like 192.168.0.1) that computers use.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Why is DNS used?</h2>
+                <ul>
+                    <li><i class="fas fa-user"></i> Easier for people to remember website names instead of long numbers.
+                    </li>
+                    <li><i class="fas fa-clock"></i> Saves time by quickly finding the right IP address for a website.
+                    </li>
+                    <li><i class="fas fa-exchange-alt"></i> Allows websites to change their IP addresses without
+                        affecting users. You can keep using the same website name.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>CERN and Tim Berners-Lee</h2>
+                <ul>
+                    <li><i class="fas fa-user"></i> 1989, Tim Berners-Lee, invented the World
+                        Wide
+                        Web</li>
+                    <li><i class="fas fa-code"></i> He created HTML, HTTP, and the first web browser</li>
+
+                    <li><i class="fas fa-lightbulb"></i>Like the invention of the printing press, which revolutionized
+                        the
+                        spread of information</li>
+                </ul>
+            </section>
+
+            <section>
+                <h1>HTML and HTTP</h1>
+            </section>
+
+            <section>
+                <h2>What is HTML?</h2>
+                <ul>
+                    <li><i class="fas fa-code"></i> HTML stands for HyperText Markup Language.</li>
+                    <li><i class="fas fa-file-alt"></i> It is the standard language used to create web pages.</li>
+                    <li><i class="fas fa-pencil-alt"></i> HTML uses tags to structure content on the web (e.g.,
+                        headings, paragraphs, links).</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Simple HTML Example</h2>
+                <pre>
+                    <code>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html&gt;
+                            &lt;head&gt;
+                                &lt;title&gt;My First Web Page&lt;/title&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h1&gt;Hello, World!&lt;/h1&gt;
+                                &lt;p&gt;This is my first web page.&lt;/p&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <h2>What is HTTP?</h2>
+                <ul>
+                    <li><i class="fas fa-globe"></i> HTTP stands for HyperText Transfer Protocol.</li>
+                    <li><i class="fas fa-exchange-alt"></i> It is the protocol used for transferring web pages over the
+                        Internet.</li>
+                    <li><i class="fas fa-share"></i> When you type a web address, HTTP helps your browser fetch the page
+                        from the server.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>How a Web Page is Sent Over HTTP</h2>
+                <pre>
+                    <code>
+                        GET / HTTP/1.1
+                        Host: www.example.com
+                    </code>
+                </pre>
+                <pre>
+                    <code>
+                        HTTP/1.1 200 OK
+                        Content-Type: text/html; charset=UTF-8
+                        
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html&gt;
+                            &lt;head&gt;
+                                &lt;title&gt;My First Web Page&lt;/title&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h1&gt;Hello, World!&lt;/h1&gt;
+                                &lt;p&gt;This is my first web page.&lt;/p&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <h2>Interactive Quiz: Match the Milestone</h2>
+                <p>Match these key milestones with years</p>
+                <div class="three-columns">
+                    <div>
+                        <h3>Milestones</h3>
+                        <ul>
+                            <li>ARPAnet</li>
+                            <li>Invention of the WWW</li>
+                            <li>First Email</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Years</h3>
+                        <ul>
+                            <li>1969</li>
+                            <li>1971</li>
+                            <li>1989</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h1>Cybersecurity and Online Safety</h1>
+            </section>
+
+            <section>
+                <h2>Importance of Staying Safe Online</h2>
+                <ul>
+                    <li><i class="fas fa-shield-alt"></i> Protects your personal information from hackers.</li>
+                    <li><i class="fas fa-user-secret"></i> Keeps your identity safe.</li>
+                    <li><i class="fas fa-lock"></i> Prevents unauthorized access to your accounts.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Tips for Protecting Personal Information</h2>
+                <ul>
+                    <li><i class="fas fa-key"></i> Use strong, unique passwords for different accounts</li>
+                    <li><i class="fas fa-user-lock"></i> Use a password manager</li>
+                    <li><i class="fas fa-envelope"></i> Be careful with the information you share online</li>
+                    <li><i class="fas fa-shield-alt"></i> Enable two-factor authentication.</li>
+                    <li><i class="fas fa-download"></i> Keep your software and apps updated.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Common Online Threats and How to Avoid Them</h2>
+                <ul>
+                    <li><i class="fas fa-bug"></i> Malware - Don't download suspicious files.</li>
+                    <li><i class="fas fa-user-secret"></i> Phishing - Be cautious of emails asking for personal
+                        information.</li>
+                    <li><i class="fas fa-link"></i> Fake websites - Check the URL before entering information.</li>
+                    <li><i class="fas fa-wifi"></i> Public Wi-Fi - Avoid accessing and sharing sensitive information on
+                        public
+                        networks.</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h2>Interactive Quiz: "Spot the Phishing Email"</h2>
+
+                <div class="three-columns">
+                    <div>
+                        <h3>Email 1</h3>
+                        <p><strong>From:</strong> support@yourbank.com</p>
+                        <p><strong>Subject:</strong> Verify your account</p>
+                        <p>Click the link to verify your account information to avoid service interruption.</p>
+                        <p><a href="#">Verify Now</a></p>
+                    </div>
+                    <div>
+                        <h3>Email 2</h3>
+                        <p><strong>From:</strong> no-reply@shopping.com</p>
+                        <p><strong>Subject:</strong> Your order has been shipped!</p>
+                        <p>Dear Customer, your order #12345 has been shipped. Track your order <a href="#">here</a>.</p>
+                    </div>
+                    <div>
+                        <h3>Email 3</h3>
+                        <p><strong>From:</strong> admin@securelogin.com</p>
+                        <p><strong>Subject:</strong> Password Reset Required</p>
+                        <p>We noticed unusual activity. Please reset your password immediately by clicking the link
+                            below.</p>
+                        <p><a href="#">Reset Password</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h1>Google's Perspective</h1>
+            </section>
+
+            <section>
+                <h2>Google's Digital Products</h2>
+                <ul>
+                    <li><i class="fas fa-video"></i> YouTube</li>
+                    <li><i class="fas fa-search"></i> Search</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Maps</li>
+                    <li><i class="fas fa-file-alt"></i> Documents</li>
+                    <li><i class="fas fa-plus"></i> And more</li>
+                    <li><i class="fas fa-users"></i> Serving billions of users</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Google's Objectives</h2>
+                <ul>
+                    <li><i class="fas fa-dollar-sign"></i> Affordable access</li>
+                    <li><i class="fas fa-signal"></i> High availability</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Low latency</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>How Google Achieves Its Goals</h2>
+                <ul>
+                    <li><i class="fas fa-network-wired"></i> Content Delivery Network (CDN)</li>
+                    <li><i class="fas fa-database"></i> Data Centers</li>
+                    <li><i class="fas fa-map-pin"></i> Edge Points of Presence (EdgePOPs)</li>
+                    <li><i class="fas fa-globe"></i> Google Global Cache</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Google's Initiatives and Innovations</h2>
+                <ul>
+                    <li><i class="fas fa-wifi"></i> Project Loon and Google Fiber</li>
+                    <li><i class="fas fa-flask"></i> Research and development in Internet technologies</li>
+                    <li><i class="fas fa-industry"></i> Transformative impact on various industries</li>
+                </ul>
+            </section>
+
+
+            <section class="full">
+                <h2>Thank you!</h2>
+                <div style="display: flex; justify-content: center;">
+                    <figure style="width: 40%; text-align: center;">
+                        <img src="slawekzak_linkedin_qr.png" alt="Suavek's LinkedIn" style="width: 100%; height: auto;">
+                        <figcaption>Slawek's LinkedIn</figcaption>
+                    </figure>
+                    <figure style="width: 40%; text-align: center;">
+                        <img src="qa.webp" alt="Q&A" style="width: 100%; height: auto;">
+                        <figcaption>Q&A</figcaption>
+                    </figure>
+                </div>
+                <p>Email: zaks &lt;at&gt; google.com</p>
+            </section>
+        </div>
+    </div>
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            controls: false,
+            width: '100%',
+            height: '100%',
+        });
+    </script>
+</body>
+
+</html>
