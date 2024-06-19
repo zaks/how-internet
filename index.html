@@ -175,14 +175,6 @@
                 <p>Slawek Zak - Technical Program Manager - Google Network Edge</p>
             </section>
 
-            <!-- 
-            II. History of the Internet
-            A. ARPAnet - A collaboration between military and academia
-            - 1960s - the US Department of Defense and universities worked together
-            - Goal: Create a resilient, decentralized network that could withstand attacks
-            - The network was designed to function even if parts of it were destroyed
-            - Information could take multiple paths to reach its destination
-            -->
 
             <section>
                 <h1>What is a network?</h1>
@@ -243,19 +235,9 @@
             </section>
 
 
-            <!-- TCP/IP protocol
-            TCP/IP is like a special language that computers use to talk to each other on the Internet
-            Imagine you have a big puzzle that you want to send to your friend
-            TCP/IP helps you break the puzzle into smaller pieces and put each piece in an envelope
-            It makes sure all the envelopes reach your friend and that the puzzle can be put back together correctly             
-            -->
-
-            <!-- physical Internet connectivity -->
             <section>
                 <h1>Physical Internet connectivity</h1>
             </section>
-
-            <!--  95-97% of all international Internet traffic is transmitted through subsea cables, slide background from subsea-cables.png -->
 
             <section data-background="subsea-cables.png">
                 <h2 class="white-shadow">
@@ -269,7 +251,7 @@
 
 
             <section>
-                <h2>Interactive Quiz: Longest Subsea Cable</h2>
+                <h2>Interactive Quiz #1: Longest Subsea Cable</h2>
                 <p>Guess the length of the longest subsea cable</p>
                 <ul>
                     <li>
@@ -357,6 +339,29 @@
                 </ul>
             </section>
 
+            <section>
+                <h2>Interactive Quiz: What is faster?</h2>
+                <p>Is sending data over fiber OR disks in a car faster?</p>
+                <div class="image-row-fixedw">
+                    <img src="station-wagon.jpg" alt="Fibre optic cable">
+                    <img src="fiber-glass.webp" alt="Coaxial cable">
+                </div>
+            </section>
+
+            <section>
+                <h2>Answer</h2>
+                <p>
+                    The car can travel approximately <strong>93,850</strong> kilometers or <strong>2.34</strong> times
+                    the earth equator
+                    to have a higher data
+                    throughput than a <strong>400</strong> Gbps
+                    fiber optic connection, assuming it is transporting <strong>6,345</strong> hard drives each with a
+                    capacity of <strong>26</strong> TB
+                    and traveling at an average speed of <strong>100</strong> km/h.
+                </p>
+            </section>
+
+
 
             <section>
                 <h1>Higher level Internet overview</h1>
@@ -412,6 +417,35 @@
                     <li><i class="fas fa-link"></i> Exchange traffic without going through a third party</li>
                     <li><i class="fas fa-globe-americas"></i> Reduces latency and costs</li>
                 </ul>
+            </section>
+
+            <section>
+                <h2>Interactive Quiz: Peering, Transit, and IXP</h2>
+                <p>Match the statements with <strong>Peering</strong>, <strong>Transit</strong>, or <strong>IXP</strong>
+                </p>
+                <div class="two-columns">
+                    <div>
+                        <h3>Statements</h3>
+                        <ul>
+                            <li>A physical location in which ISPs exchange data.</li>
+                            <li>Direct exchange of traffic between networks.</li>
+                            <li>Purchase of bandwidth from a larger ISP.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Possible Answers</h3>
+                        <ul>
+                            <li>Peering</li>
+                            <li>Transit</li>
+                            <li>IXP</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>High level internet overview</h2>
+                <img src="internet-schematics.svg" alt="Internet schematics" style="width: 60%">
             </section>
 
             <section>
@@ -486,6 +520,29 @@
             </section>
 
             <section>
+                <h2>Interactive Quiz: Internet vs. Web</h2>
+                <p>Match the features with <strong>Internet</strong> or <strong>Web</strong></p>
+                <div class="two-columns">
+                    <div>
+                        <h3>Features</h3>
+                        <ul>
+                            <li>Collection of networks</li>
+                            <li>Web pages and websites</li>
+                            <li>Transmits data</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>More features</h3>
+                        <ul>
+                            <li>Uses HTTP and HTML</li>
+                            <li>Uses IP addresses</li>
+                            <li>Uses domain names</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
                 <h1>DNS - Domain Name System</h1>
             </section>
 
@@ -494,7 +551,8 @@
                 <ul>
                     <li><i class="fas fa-globe"></i> DNS stands for Domain Name System.</li>
                     <li><i class="fas fa-address-book"></i> It works like the Internet's address book.</li>
-                    <li><i class="fas fa-search"></i> Translates human-friendly website names (like www.google.com) into
+                    <li><i class="fas fa-search"></i> Translates human-friendly website names (like www.google.com)
+                        into
                         IP addresses (like 192.168.0.1) that computers use.</li>
                 </ul>
             </section>
@@ -502,9 +560,11 @@
             <section>
                 <h2>Why is DNS used?</h2>
                 <ul>
-                    <li><i class="fas fa-user"></i> Easier for people to remember website names instead of long numbers.
+                    <li><i class="fas fa-user"></i> Easier for people to remember website names instead of long
+                        numbers.
                     </li>
-                    <li><i class="fas fa-clock"></i> Saves time by quickly finding the right IP address for a website.
+                    <li><i class="fas fa-clock"></i> Saves time by quickly finding the right IP address for a
+                        website.
                     </li>
                     <li><i class="fas fa-exchange-alt"></i> Allows websites to change their IP addresses without
                         affecting users. You can keep using the same website name.</li>
@@ -519,7 +579,8 @@
                         Web</li>
                     <li><i class="fas fa-code"></i> He created HTML, HTTP, and the first web browser</li>
 
-                    <li><i class="fas fa-lightbulb"></i>Like the invention of the printing press, which revolutionized
+                    <li><i class="fas fa-lightbulb"></i>Like the invention of the printing press, which
+                        revolutionized
                         the
                         spread of information</li>
                 </ul>
@@ -561,10 +622,24 @@
                 <h2>What is HTTP?</h2>
                 <ul>
                     <li><i class="fas fa-globe"></i> HTTP stands for HyperText Transfer Protocol.</li>
-                    <li><i class="fas fa-exchange-alt"></i> It is the protocol used for transferring web pages over the
+                    <li><i class="fas fa-exchange-alt"></i> It is the protocol used for transferring web pages over
+                        the
                         Internet.</li>
-                    <li><i class="fas fa-share"></i> When you type a web address, HTTP helps your browser fetch the page
+                    <li><i class="fas fa-share"></i> When you type a web address, HTTP helps your browser fetch the
+                        page
                         from the server.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>What is HTTPS?</h2>
+                <ul>
+                    <li><i class="fas fa-lock"></i> HTTPS stands for HyperText Transfer Protocol Secure.</li>
+                    <li><i class="fas fa-shield-alt"></i> It is a secure version of HTTP that encrypts data between
+                        your
+                        browser and the server.</li>
+                    <li><i class="fas fa-user-secret"></i> HTTPS protects data from hackers and
+                        eavesdroppers.</li>
                 </ul>
             </section>
 
@@ -619,6 +694,29 @@
             </section>
 
             <section>
+                <h2>Interactive Quiz: Identify the Protocol</h2>
+                <p>Match the following network protocols and functions.</p>
+                <div class="two-columns">
+                    <div>
+                        <h3>Protocols</h3>
+                        <ul>
+                            <li>HTTP</li>
+                            <li>HTTPS</li>
+                            <li>FTP</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Functions</h3>
+                        <ul>
+                            <li>Transferring web pages.</li>
+                            <li>Transferring files between servers.</li>
+                            <li>Securely transferring web pages.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
                 <h1>Cybersecurity and Online Safety</h1>
             </section>
 
@@ -649,7 +747,8 @@
                     <li><i class="fas fa-user-secret"></i> Phishing - Be cautious of emails asking for personal
                         information.</li>
                     <li><i class="fas fa-link"></i> Fake websites - Check the URL before entering information.</li>
-                    <li><i class="fas fa-wifi"></i> Public Wi-Fi - Avoid accessing and sharing sensitive information on
+                    <li><i class="fas fa-wifi"></i> Public Wi-Fi - Avoid accessing and sharing sensitive information
+                        on
                         public
                         networks.</li>
                 </ul>
@@ -671,7 +770,8 @@
                         <h3>Email 2</h3>
                         <p><strong>From:</strong> no-reply@shopping.com</p>
                         <p><strong>Subject:</strong> Your order has been shipped!</p>
-                        <p>Dear Customer, your order #12345 has been shipped. Track your order <a href="#">here</a>.</p>
+                        <p>Dear Customer, your order #12345 has been shipped. Track your order <a href="#">here</a>.
+                        </p>
                     </div>
                     <div>
                         <h3>Email 3</h3>
@@ -681,6 +781,31 @@
                             below.</p>
                         <p><a href="#">Reset Password</a></p>
                     </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Interactive Quiz: Identify the Security Threat</h2>
+                <p>Match the type of threat in each scenario</p>
+                <div class="three-columns">
+                    <div>
+                        <h3>Scenario 1</h3>
+                        <p>An email asks for your password and includes a suspicious link.</p>
+                    </div>
+                    <div>
+                        <h3>Scenario 2</h3>
+                        <p>A pop-up on a website claims your computer is infected and prompts you to download a file.
+                        </p>
+                    </div>
+                    <div>
+                        <h3>Scenario 3</h3>
+                        <p>You receive a message from an unknown sender with an attachment.</p>
+                    </div>
+                </div>
+                <div class="three-columns" style="margin-top: 30px">
+                    <div>Spam?</div>
+                    <div>Phishing?</div>
+                    <div>Malware?</div>
                 </div>
             </section>
 
@@ -726,22 +851,6 @@
                     <li><i class="fas fa-flask"></i> Research and development in Internet technologies</li>
                     <li><i class="fas fa-industry"></i> Transformative impact on various industries</li>
                 </ul>
-            </section>
-
-
-            <section class="full">
-                <h2>Thank you!</h2>
-                <div style="display: flex; justify-content: center;">
-                    <figure style="width: 40%; text-align: center;">
-                        <img src="slawekzak_linkedin_qr.png" alt="Suavek's LinkedIn" style="width: 100%; height: auto;">
-                        <figcaption>Slawek's LinkedIn</figcaption>
-                    </figure>
-                    <figure style="width: 40%; text-align: center;">
-                        <img src="qa.webp" alt="Q&A" style="width: 100%; height: auto;">
-                        <figcaption>Q&A</figcaption>
-                    </figure>
-                </div>
-                <p>Email: zaks &lt;at&gt; google.com</p>
             </section>
         </div>
     </div>
